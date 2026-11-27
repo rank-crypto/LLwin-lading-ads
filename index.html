@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#00091F" />
+  <title>LLwin - Đối Tác Độc Quyền Toàn Cầu Sunderland AFC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at 50% 35%, #071947 0%, #020817 100%);
+      color: #ffffff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mobile-only full-bleed stage (9:16 mobile web background) */
+    .mobile-viewport {
+      position: relative;
+      width: 100%;
+      min-height: 100dvh;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3cqw;
+      background-color: #00091f;
+      background-image: url('./assets/bg-mobile.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      container-type: inline-size;
+    }
+
+    /* On tablet/desktop, frame strictly at standard 9:16 mobile size */
+    @media (min-width: 500px) {
+      .mobile-viewport {
+        width: min(100vw, 450px, calc(100dvh * 9 / 16));
+        height: min(100dvh, calc(450px * 16 / 9));
+        min-height: unset;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(32, 102, 253, 0.25);
+      }
+    }
+
+    /* Central frosted-glass UI card (UI ảnh 2) */
+    .promo-card {
+      position: relative;
+      width: 100%;
+      margin-top: 2cqw;
+      padding: 5.2cqw 4.8cqw 5.6cqw;
+      border-radius: 6cqw;
+      background: linear-gradient(180deg, rgba(0, 9, 31, 0.44) 0%, rgba(0, 54, 183, 0.44) 100%);
+      border: 3px solid #2066FD;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      box-shadow: 0px 0px 4px 0px #2066FD;
+      text-align: center;
+      animation: cardFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes cardFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Top header: Logo (ảnh 3) + Security badge */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.4cqw;
+      margin-bottom: 5.4cqw;
+      padding: 0 0.8cqw;
+    }
+
+    .brand-logo {
+      display: block;
+      height: 10.8cqw;
+      width: auto;
+      max-width: 52%;
+      object-fit: contain;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .security-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.4cqw;
+      padding: 1.65cqw 3.1cqw;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #0D74FF 0%, #0062EA 100%);
+      box-shadow: 0 2px 10px rgba(0, 106, 255, 0.42);
+      color: #ffffff;
+      font-size: 2.55cqw;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .security-icon {
+      width: 3.4cqw;
+      height: 3.4cqw;
+      flex-shrink: 0;
+    }
+
+    /* Main Headline */
+    .promo-title {
+      font-size: 6.5cqw;
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 1.4cqw;
+      white-space: nowrap;
+    }
+
+    /* Highlighted amounts: 58K, 8888k, 200k */
+    .hl-wrap {
+      margin-bottom: 3.8cqw;
+      line-height: 1;
+    }
+
+    .hl {
+      position: relative;
+      display: inline-block;
+      color: transparent;
+      font-weight: 800;
+      line-height: 1.08;
+      white-space: nowrap;
+      vertical-align: baseline;
+      isolation: isolate;
+      filter: drop-shadow(0px 1.39px 6.97px #006FFF40);
+    }
+
+    .hl::before,
+    .hl::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* Rounded outer white border layer */
+    .hl::before {
+      z-index: 1;
+      color: #ffffff;
+      -webkit-text-fill-color: #ffffff;
+    }
+
+    /* Vertical gradient fill layer */
+    .hl::after {
+      z-index: 2;
+      background: linear-gradient(180deg, #99DFFF 0%, #006EFF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* Hero 58K: 4px solid #FFFFFF outer border */
+    .hl-hero {
+      font-size: 11.2cqw;
+      letter-spacing: 0.01em;
+      padding: 0 2px;
+    }
+
+    .hl-hero::before {
+      text-shadow:
+        4px 0 0 #FFFFFF,
+        3.7px 1.53px 0 #FFFFFF,
+        2.83px 2.83px 0 #FFFFFF,
+        1.53px 3.7px 0 #FFFFFF,
+        0 4px 0 #FFFFFF,
+        -1.53px 3.7px 0 #FFFFFF,
+        -2.83px 2.83px 0 #FFFFFF,
+        -3.7px 1.53px 0 #FFFFFF,
+        -4px 0 0 #FFFFFF,
+        -3.7px -1.53px 0 #FFFFFF,
+        -2.83px -2.83px 0 #FFFFFF,
+        -1.53px -3.7px 0 #FFFFFF,
+        0 -4px 0 #FFFFFF,
+        1.53px -3.7px 0 #FFFFFF,
+        2.83px -2.83px 0 #FFFFFF,
+        3.7px -1.53px 0 #FFFFFF,
+        2px 0 0 #FFFFFF,
+        1.41px 1.41px 0 #FFFFFF,
+        0 2px 0 #FFFFFF,
+        -1.41px 1.41px 0 #FFFFFF,
+        -2px 0 0 #FFFFFF,
+        -1.41px -1.41px 0 #FFFFFF,
+        0 -2px 0 #FFFFFF,
+        1.41px -1.41px 0 #FFFFFF;
+    }
+
+    /* Inline 8888k & 200k: crisp proportional white border */
+    .hl-inline {
+      font-size: 4.1cqw;
+      font-weight: 800;
+      margin: 0 0.75cqw;
+    }
+
+    .hl-inline::before {
+      text-shadow:
+        2.3px 0 0 #FFFFFF,
+        2.12px 0.88px 0 #FFFFFF,
+        1.63px 1.63px 0 #FFFFFF,
+        0.88px 2.12px 0 #FFFFFF,
+        0 2.3px 0 #FFFFFF,
+        -0.88px 2.12px 0 #FFFFFF,
+        -1.63px 1.63px 0 #FFFFFF,
+        -2.12px 0.88px 0 #FFFFFF,
+        -2.3px 0 0 #FFFFFF,
+        -2.12px -0.88px 0 #FFFFFF,
+        -1.63px -1.63px 0 #FFFFFF,
+        -0.88px -2.12px 0 #FFFFFF,
+        0 -2.3px 0 #FFFFFF,
+        0.88px -2.12px 0 #FFFFFF,
+        1.63px -1.63px 0 #FFFFFF,
+        2.12px -0.88px 0 #FFFFFF,
+        1.15px 0 0 #FFFFFF,
+        0.81px 0.81px 0 #FFFFFF,
+        0 1.15px 0 #FFFFFF,
+        -0.81px 0.81px 0 #FFFFFF,
+        -1.15px 0 0 #FFFFFF,
+        -0.81px -0.81px 0 #FFFFFF,
+        0 -1.15px 0 #FFFFFF,
+        0.81px -0.81px 0 #FFFFFF;
+    }
+
+    /* Supporting Promo Lines (#D8DFE6) */
+    .promo-copy {
+      font-size: 3.55cqw;
+      font-weight: 300;
+      line-height: 1.62;
+      color: #D8DFE6;
+      margin-bottom: 4.6cqw;
+    }
+
+    .promo-copy p {
+      white-space: nowrap;
+    }
+
+    .promo-slogan {
+      font-weight: 600;
+      color: #D8DFE6;
+      letter-spacing: 0.01em;
+    }
+
+    /* Primary CTA Button */
+    .cta-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.3cqw;
+      width: 94%;
+      margin: 0 auto;
+      height: 12.6cqw;
+      border-radius: 3.2cqw;
+      background: linear-gradient(180deg, #5E9AFF 0%, #356DCA 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 4.45cqw;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      box-shadow:
+        0 4px 18px rgba(0, 111, 255, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.16s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.22) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: btnSheen 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes btnSheen {
+      0%, 62% {
+        left: -120%;
+      }
+      100% {
+        left: 160%;
+      }
+    }
+
+    .cta-btn:hover {
+      filter: brightness(1.07);
+      box-shadow:
+        0 6px 22px rgba(32, 102, 253, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .cta-btn:active {
+      transform: scale(0.975);
+      filter: brightness(0.97);
+    }
+
+    .cta-icon {
+      width: 5cqw;
+      height: 5cqw;
+      flex-shrink: 0;
+      transition: transform 0.18s ease;
+    }
+
+    .cta-btn:hover .cta-icon {
+      transform: translateX(2px);
+    }
+  </style>
+</head>
+<body>
+  <main class="mobile-viewport">
+    <section class="promo-card" aria-label="Ưu đãi đăng ký LLwin">
+      <header class="card-header">
+        <img
+          class="brand-logo"
+          src="./assets/logo.png"
+          alt="LLwin - Official Global Partner of Sunderland AFC"
+        />
+        <div class="security-badge">
+          <svg class="security-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 2L4.5 5.2V11.3C4.5 16.4 7.7 21 12 22.5C16.3 21 19.5 16.4 19.5 11.3V5.2L12 2Z"
+              fill="#FFFFFF"
+            />
+            <circle cx="12" cy="10.1" r="1.75" fill="#0066F5" />
+            <path
+              d="M11.1 11.4H12.9L13.3 15.5H10.7L11.1 11.4Z"
+              fill="#0066F5"
+            />
+          </svg>
+          <span>KẾT NỐI BẢO MẬT</span>
+        </div>
+      </header>
+
+      <h1 class="promo-title">ĐĂNG KÝ NHẬN ĐẾN</h1>
+
+      <div class="hl-wrap">
+        <span class="hl hl-hero" data-text="58K">58K</span>
+      </div>
+
+      <div class="promo-copy">
+        <p>Nạp đầu tặng đến <span class="hl hl-inline" data-text="8888k">8888k</span>, Giới thiệu bạn</p>
+        <p>nhận ngay <span class="hl hl-inline" data-text="200k">200k</span></p>
+        <p>Chỉ có tại LLwin - <span class="promo-slogan">ĐỈNH CAO CHIẾN THẮNG</span></p>
+      </div>
+
+      <a class="cta-btn" href="https://26llwin.com/?id=652824990">
+        <span>ĐẾN CỔNG LINK...</span>
+        <svg
+          class="cta-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 12h13" />
+          <path d="M11 7l5 5-5 5" />
+          <path d="M20 5v14" />
+        </svg>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
